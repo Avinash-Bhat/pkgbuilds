@@ -1,0 +1,9 @@
+# Ignore all pkg and src dirs
+pkg/
+src/
+
+# Ignore the built packages or their symbolic links
+*.tar*
+
+# Ignore the Mathematica install
+Mathematica_8.0.4_LINUX.sh
