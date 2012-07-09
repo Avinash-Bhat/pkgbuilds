@@ -1,0 +1,52 @@
+# Contributor: gns_ank <anikevicius@gmail.com>
+
+pkgname=lua-ldoc-git
+pkgver=20120708
+pkgrel=1
+pkgdesc="Second-generation documentation tool that can be used as a replacement for LuaDoc"
+arch=('i686' 'x86_64')
+url="http://stevedonovan.github.com/ldoc/"
+license=('')
+depends=('lua-penlight-git')
+makedepends=('git')
+provides=('lua-ldoc')
+conflicts=('lua-ldoc')
+source=(ldoc)
+md5sums=('eb8017fb6ec9c42fb51a77db98cf5a0e')
+
+_gitroot="https://github.com/stevedonovan/LDoc"
+_gitname="LDoc"
+
+build() {
+  cd "$srcdir"
+  msg "Connecting to GIT server...."
+
+  if [ -d $_gitname ] ; then
+    cd $_gitname && git pull origin
+    msg "The local files are updated."
+  else
+    git clone $_gitroot $_gitname
+  fi
+
+  msg "GIT checkout done or server timeout"
+  msg "Installing..."
+}
+
+package() {
+  cd "$srcdir/$_gitname"
+  mkdir -p $pkgdir/usr/share/doc/ldoc
+  mkdir -p $pkgdir/usr/bin
+  mkdir -p $pkgdir/usr/share/lua/5.1/ldoc
+  # Install the actual libraries and set permissions
+  cp -R ldoc $pkgdir/usr/share/lua/5.1/
+  chmod -R 755 $pkgdir/usr/share/lua/5.1/ldoc
+  install -D -m644 ldoc.lua $pkgdir/usr/share/lua/5.1/ldoc.lua
+  # Install the docs
+  install -D -m644 docs/* \
+      $pkgdir/usr/share/doc/ldoc
+  # Install the script
+  install -D -m755 ${srcdir}/ldoc \
+    ${pkgdir}/usr/bin/
+}
+
+# vim: tw=88
