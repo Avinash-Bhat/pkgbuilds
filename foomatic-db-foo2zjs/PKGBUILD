@@ -1,0 +1,77 @@
+#Maintainer: Nicola Bignami <nicola@kernel-panic.dnsdojo.net>
+
+pkgname=('foomatic-db-foo2zjs')
+arch=('i686' 'x86_64')
+_snapdate=20120626
+_relver=4.0.16
+_foomatic_db_pkgrel=1
+pkgver=${_relver}_${_snapdate}
+pkgrel=1
+makedepends=()
+license=('GPL' 'custom')
+depends=('perl' 'libxml2')
+optdepends=('foo2zjs')
+conflicts=('foomatic-db-ppd' 'foomatic-db-hpijs' 'foomatic-db')
+provides=('foomatic-db-hpijs' 'foomatic-db')
+source=(http://mirrors.kernel.org/archlinux/extra/os/${CARCH}/foomatic-db-1:${pkgver}-${_foomatic_db_pkgrel}-${CARCH}.pkg.tar.xz)
+url="http://www.linuxprinting.org/foomatic.html"
+if [ x$CARCH == x"x86_64" ]; then
+    md5sums=('83f1f321365078b8fc70b10317b1e8ff')
+else
+    md5sums=('e21a87ed220fb9a43bd9d0b689d3940a')
+fi
+pkgdesc="Foomatic - The collected knowledge about printers, drivers, and driver options in XML files, used by foomatic-db-engine to generate PPD files. Rebuilt for use with foo2zjs."
+
+build() {
+    cd ${srcdir}/
+    #cp -Rp $(echo * | sed -e 's|.PKGINFO||' -e "s/foomatic-db-${pkgver}-${_foomatic_db_pkgrel}-${CARCH}.pkg.tar.gz//") ${pkgdir}/
+    cp -Rp ${srcdir}/usr ${pkgdir}/
+    # foo2zjs gives us something different
+    rm ${pkgdir}/usr/share/foomatic/db/source/driver/foo2hiperc.xml
+    rm ${pkgdir}/usr/share/foomatic/db/source/driver/foo2hp.xml
+    rm ${pkgdir}/usr/share/foomatic/db/source/driver/foo2lava.xml
+    rm ${pkgdir}/usr/share/foomatic/db/source/driver/foo2oak-z1.xml
+    rm ${pkgdir}/usr/share/foomatic/db/source/driver/foo2oak.xml
+    rm ${pkgdir}/usr/share/foomatic/db/source/driver/foo2qpdl.xml
+    rm ${pkgdir}/usr/share/foomatic/db/source/driver/foo2slx.xml
+    rm ${pkgdir}/usr/share/foomatic/db/source/driver/foo2xqx.xml
+    rm ${pkgdir}/usr/share/foomatic/db/source/driver/foo2zjs.xml
+    rm ${pkgdir}/usr/share/foomatic/db/source/printer/HP-LaserJet_1000.xml
+    rm ${pkgdir}/usr/share/foomatic/db/source/printer/HP-LaserJet_1005.xml
+    rm ${pkgdir}/usr/share/foomatic/db/source/printer/HP-LaserJet_1018.xml
+    rm ${pkgdir}/usr/share/foomatic/db/source/printer/HP-LaserJet_1020.xml
+    rm ${pkgdir}/usr/share/foomatic/db/source/printer/HP-LaserJet_1022.xml
+    rm ${pkgdir}/usr/share/foomatic/db/source/printer/HP-LaserJet_M1005_MFP.xml
+    rm ${pkgdir}/usr/share/foomatic/db/source/printer/HP-LaserJet_1022n.xml
+    rm ${pkgdir}/usr/share/foomatic/db/source/printer/HP-LaserJet_1022nw.xml
+    rm ${pkgdir}/usr/share/foomatic/db/source/printer/HP-LaserJet_P1005.xml
+    rm ${pkgdir}/usr/share/foomatic/db/source/printer/HP-LaserJet_P1006.xml
+    rm ${pkgdir}/usr/share/foomatic/db/source/printer/HP-LaserJet_P1007.xml
+    rm ${pkgdir}/usr/share/foomatic/db/source/printer/HP-LaserJet_P1008.xml
+    rm ${pkgdir}/usr/share/foomatic/db/source/printer/HP-Color_LaserJet_1500.xml
+    rm ${pkgdir}/usr/share/foomatic/db/source/printer/HP-Color_LaserJet_1600.xml
+    rm ${pkgdir}/usr/share/foomatic/db/source/printer/HP-Color_LaserJet_2600n.xml
+    rm ${pkgdir}/usr/share/foomatic/db/source/printer/HP-Color_LaserJet_CP1215.xml
+    rm ${pkgdir}/usr/share/foomatic/db/source/printer/HP-LaserJet_M1120_MFP.xml
+    rm ${pkgdir}/usr/share/foomatic/db/source/printer/HP-LaserJet_P1505.xml
+    rm ${pkgdir}/usr/share/foomatic/db/source/printer/HP-LaserJet_P2014.xml
+    rm ${pkgdir}/usr/share/foomatic/db/source/printer/Minolta-magicolor_2200_DL.xml
+    rm ${pkgdir}/usr/share/foomatic/db/source/printer/Minolta-magicolor_2300_DL.xml
+    rm ${pkgdir}/usr/share/foomatic/db/source/printer/Minolta-magicolor_2430_DL.xml
+    rm ${pkgdir}/usr/share/foomatic/db/source/printer/KONICA_MINOLTA-magicolor_2430_DL.xml
+    rm ${pkgdir}/usr/share/foomatic/db/source/printer/KONICA_MINOLTA-magicolor_2480_MF.xml
+    rm ${pkgdir}/usr/share/foomatic/db/source/printer/KONICA_MINOLTA-magicolor_2490_MF.xml
+    rm ${pkgdir}/usr/share/foomatic/db/source/printer/KONICA_MINOLTA-magicolor_2530_DL.xml
+    rm ${pkgdir}/usr/share/foomatic/db/source/printer/Kyocera-KM-1635.xml
+    rm ${pkgdir}/usr/share/foomatic/db/source/printer/Kyocera-KM-2035.xml
+    rm ${pkgdir}/usr/share/foomatic/db/source/printer/Xerox-Phaser_6110.xml
+    rm ${pkgdir}/usr/share/foomatic/db/source/printer/Xerox-Phaser_6115MFP.xml
+    rm ${pkgdir}/usr/share/foomatic/db/source/printer/Samsung-CLP-300.xml
+    rm ${pkgdir}/usr/share/foomatic/db/source/printer/Samsung-CLP-310.xml
+    rm ${pkgdir}/usr/share/foomatic/db/source/printer/Samsung-CLP-315.xml
+    rm ${pkgdir}/usr/share/foomatic/db/source/printer/Samsung-CLP-600.xml
+    rm ${pkgdir}/usr/share/foomatic/db/source/printer/Samsung-CLP-610.xml
+    rm ${pkgdir}/usr/share/foomatic/db/source/printer/Samsung-CLX-2160.xml
+    rm ${pkgdir}/usr/share/foomatic/db/source/printer/Samsung-CLX-3160.xml
+    rm ${pkgdir}/usr/share/foomatic/db/source/printer/Samsung-CLX-3175.xml
+}
