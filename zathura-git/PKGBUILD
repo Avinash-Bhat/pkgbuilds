@@ -1,6 +1,6 @@
 # Maintainer: Moritz Lipp <mlq@pwmt.org>
 pkgname=zathura-git
-pkgver=20120708
+pkgver=20120716
 pkgrel=1
 pkgdesc="a document viewer"
 arch=('i686' 'x86_64')
@@ -18,7 +18,8 @@ optdepends=(
   'zathura-ps-git: PostSctipt support by using libspectre'
 )
 
-_gitroot='git://pwmt.org/zathura.git'
+#_gitroot='git://pwmt.org/zathura.git'
+_gitroot='git://github.com/gns-ank/zathura.git'
 _gitname='zathura'
 _gitbranch='develop'
 

@@ -3,7 +3,7 @@
 _girara_gtk_version=2
 
 pkgname=girara-gtk$_girara_gtk_version-git
-pkgver=20120628
+pkgver=20120716
 pkgrel=1
 pkgdesc="user interface library"
 arch=('i686' 'x86_64')

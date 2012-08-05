@@ -1,7 +1,7 @@
 # Maintainer: mlq <mlq@pwmt.org>
 
 pkgname=girara-common-git
-pkgver=20120628
+pkgver=20120716
 pkgrel=1
 pkgdesc="user interface library (common files)"
 arch=('i686' 'x86_64')

@@ -1,7 +1,7 @@
 #Contributor: karnath <karnathtorjian@gmail.com>
 
 pkgname=zathura-pdf-mupdf-git
-pkgver=20120708
+pkgver=20120716
 pkgrel=1
 pkgdesc="PDF support for zathura by using the mupdf library"
 arch=('i686' 'x86_64')

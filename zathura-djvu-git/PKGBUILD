@@ -1,7 +1,7 @@
 #Contributor: karnath <karnathtorjian@gmail.com>
 
 pkgname=zathura-djvu-git
-pkgver=20120708
+pkgver=20120716
 pkgrel=1
 pkgdesc="DjVu support for zathura"
 arch=('i686' 'x86_64')
