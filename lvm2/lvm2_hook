@@ -12,6 +12,7 @@ run_hook() {
     done
 
     msg "Activating logical volumes..."
+    lvm pvscan
     [ -d /etc/lvm ] && lvm vgscan
 
     if [ -n "$quiet" ]; then
