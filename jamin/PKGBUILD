@@ -15,6 +15,9 @@ source=(http://downloads.sourceforge.net/sourceforge/${pkgname}/${pkgname}-${pkg
 md5sums=('032f2a4a578a8938f76282112d56c8d6')
 
 build() {
+    CFLAGS=${CFLAGS}" -ldl"
+    CXXFLAGS=${CXXFLAGS}" -ldl"
+
 	cd ${srcdir}/${pkgname}-${pkgver}
 	./configure --prefix=/usr --mandir=/usr/share
 	make
