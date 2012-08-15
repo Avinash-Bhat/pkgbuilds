@@ -1,0 +1,28 @@
+# Maintainer: David Adler <david dot jo dot adler at gmail dot com>
+# Contributor: SpepS <dreamspepser at yahoo dot it>
+
+pkgname=yoshimi
+pkgver=1.0.0
+pkgrel=2
+pkgdesc="ZynAddSubFX fork with improved JACK audio & MIDI IO"
+arch=('i686' 'x86_64')
+url="http://yoshimi.sourceforge.net/"
+license=('GPL')
+depends=('jack' 'fltk' 'fftw' 'mxml')
+makedepends=('cmake' 'boost' 'mesa')
+install="$pkgname.install"
+source=("http://downloads.sourceforge.net/project/$pkgname/1.0/$pkgname-$pkgver.tar.bz2")
+md5sums=('5f1214155f9274d478a5eb63562f511b')
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver/src" 
+  cmake . -DCMAKE_INSTALL_PREFIX="$pkgdir/usr"
+  make
+}
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver/src" 
+  make install
+}
+
+# vim:set ts=2 sw=2 et:
