@@ -1,4 +1,5 @@
 # Maintainer: speps <speps at aur dot archlinux dot org>
+# Contributor: gns-ank <gns-ank at aur dot archlinux dot org>
 
 pkgname=('lua51-lgi-git' 'lua-lgi-git')
 pkgver=20130102
