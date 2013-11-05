@@ -1,19 +1,19 @@
 # Contributor: karnath <karnathtorjian@gmail.com>
 # Contributor: gns_ank <anikevicius@gmail.com>
 
-_gitname="zathura-djvu"
+_gitname="zathura-pdf-poppler"
 
-pkgname=zathura-djvu-git
-pkgver=2013.05.12.g05ea05b
+pkgname=zathura-pdf-poppler-git
+pkgver=2013.09.29.gd34d04e
 pkgrel=1
-pkgdesc="DjVu support for zathura"
+pkgdesc="PDF support for zathura by using the poppler rendering library"
 arch=('i686' 'x86_64')
-url="http://pwmt.org/projects/zathura/plugins/zathura-djvu"
+url="http://pwmt.org/projects/zathura/plugins/zathura-pdf-poppler"
 license=('custom')
-depends=('djvulibre' 'zathura-git')
+depends=('poppler-glib' 'zathura-git')
 makedepends=('git')
-conflicts=('zathura-djvu')
-provides=('zathura-djvu' 'zathura-djvu-git')
+conflicts=('zathura-pdf-mupdf' 'zathura-pdf-mupdf-git' 'zathura-pdf-poppler')
+provides=('zathura-pdf-poppler-git' 'zathura-pdf-poppler')
 source=("git://pwmt.org/${_gitname}.git#branch=develop")
 md5sums=('SKIP')
 

@@ -1,7 +1,10 @@
-#Contributor: karnath <karnathtorjian@gmail.com>
+# Contributor: karnath <karnathtorjian@gmail.com>
+# Contributor: gns_ank <anikevicius@gmail.com>
+
+_gitname="zathura-ps"
 
 pkgname=zathura-ps-git
-pkgver=20120716
+pkgver=2013.05.12.gf8fecd0
 pkgrel=1
 pkgdesc="PostScript support for zathura"
 arch=('i686' 'x86_64')
@@ -11,38 +14,27 @@ depends=('libspectre' 'zathura-git')
 makedepends=('git')
 conflicts=('zathura-ps')
 provides=('zathura-ps' 'zathura-djvu-ps')
+source=("git://pwmt.org/${_gitname}.git#branch=develop")
+md5sums=('SKIP')
 
-_gitname="zathura-ps"
-_gitroot="git://pwmt.org/$_gitname.git"
-_branch="develop"
+pkgver() {
+  cd "${srcdir}/${_gitname}"
+  git log -1 --format="%cd.g%h" --date=short | sed 's/-/./g'
+}
 
 build() {
-  cd ${srcdir}
-  msg "Connecting to GIT server..."
-
-  if [ -d $_gitname ] ; then
-    cd "$_gitname" && git pull origin
-    msg "The local files are updated."
-  else
-    git clone "$_gitroot" "$_gitname"
-    cd "$_gitname" && git checkout --track -b $_branch origin/$_branch
-  fi
-
-  msg "GIT checkout done or server timeout"
-  msg "Starting make..."
-
-  if [ -d "$srcdir/$_gitname-build" ]; then
-    rm -rf "$srcdir/$_gitname-build"
-  fi
-
-  git clone "$srcdir/$_gitname" "$srcdir/$_gitname-build" || return 1
-  cd "$srcdir/$_gitname-build" || return 1
-
+  cd "${srcdir}/${_gitname}"
   make
 }
 
-package () {
-  cd "${srcdir}/$_gitname-build"
+package() {
+  cd "${srcdir}/${_gitname}"
+
+  # install files
   make DESTDIR="$pkgdir" install
+
+  # install license
   install -D -m664 LICENSE "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
 }
+
+# vim:set ts=2 sw=2 et:
