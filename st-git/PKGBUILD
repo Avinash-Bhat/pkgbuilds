@@ -1,0 +1,67 @@
+# Maintainer: Gaetan Bisson <bisson@archlinux.org>
+# Contributor: Scytrin dai Kinthra <scytrin@gmail.com>
+
+pkgname=st-git
+_pkgname=st
+epoch=1
+pkgver=20140524.488977c
+pkgrel=1
+pkgdesc='Simple virtual terminal emulator for X'
+url='http://git.suckless.org/st/'
+arch=('i686' 'x86_64' 'armv7h')
+license=('MIT')
+depends=('libxft')
+makedepends=('ncurses' 'libxext' 'git')
+source=('git://git.suckless.org/st')
+sha1sums=('SKIP')
+
+provides=("${_pkgname}")
+conflicts=("${_pkgname}")
+
+pkgver() {
+	cd "${srcdir}/${_pkgname}"
+	git log -1 --format='%cd.%h' --date=short | tr -d -
+}
+
+prepare() {
+    if [ -e ${startdir}/config.h ]
+    then
+        echo config.def.h found.
+
+        if [ -n "${EDITOR}" ] ; then
+            "${EDITOR}" -d "${startdir}/config.h" ${srcdir}/${_pkgname}/config.def.h
+        fi
+    else
+        cp ${srcdir}/${_pkgname}/config.def.h ${startdir}/config.h
+
+        # sed '/char font/s/".*"/"Fixed:pixelsize=13:style=SemiCondensed"/' -i ${startdir}/config.h
+
+        echo Please edit ${startdir}/config.h to customize your options.
+
+        if [ -n "${EDITOR}" ] ; then
+            "${EDITOR}" "${startdir}/config.h"
+        fi
+    fi
+
+	cd "${srcdir}/${_pkgname}"
+
+	sed \
+		-e 's/CPPFLAGS =/CPPFLAGS +=/g' \
+		-e 's/CFLAGS =/CFLAGS +=/g' \
+		-e 's/LDFLAGS =/LDFLAGS +=/g' \
+		-i config.mk
+
+    cp ${startdir}/config.h ${srcdir}/${_pkgname}/config.h
+}
+
+build() {
+	cd "${srcdir}/${_pkgname}"
+	make X11INC=/usr/include/X11 X11LIB=/usr/lib/X11
+}
+
+package() {
+	cd "${srcdir}/${_pkgname}"
+	make PREFIX=/usr DESTDIR="${pkgdir}" TERMINFO="${pkgdir}/usr/share/terminfo" install
+	install -Dm644 LICENSE "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
+	install -Dm644 README "${pkgdir}/usr/share/doc/${pkgname}/README"
+}

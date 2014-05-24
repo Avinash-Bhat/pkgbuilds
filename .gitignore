@@ -7,3 +7,6 @@ src/
 
 # Ignore the Mathematica install
 Mathematica_8.0.4_LINUX.sh
+
+# Ignore any vim backup files if there are any:
+.*.un~
